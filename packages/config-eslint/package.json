@@ -1,0 +1,14 @@
+{
+    "name": "@corpora/config-eslint",
+    "version": "0.0.1",
+    "private": true,
+    "main": "./index.mjs",
+    "exports": {
+        ".": "./index.mjs",
+        "./next": "./next.mjs"
+    },
+    "devDependencies": {
+        "eslint": "^9",
+        "eslint-config-next": "16.1.1"
+    }
+}

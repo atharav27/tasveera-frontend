@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "allowJs": true,
+    "jsx": "react-jsx",
+    "noEmit": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"],
+      "@corpora/ui": ["../../packages/ui/src"],
+      "@corpora/utils": ["../../packages/utils/src"],
+      "@corpora/api-client": ["../../packages/api-client/src"]
+    },
+    "incremental": true
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts",
+    "../../packages/ui/src/lib/utils.ts",
+    "../../packages/ui/src/common-components/stat-cards/dashboard-card.tsx",
+    "../../packages/ui/src/common-components/stat-cards/stat-card.tsx"
+  ],
+  "exclude": ["node_modules"]
+}

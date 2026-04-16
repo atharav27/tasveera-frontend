@@ -1,0 +1,12 @@
+{
+    "name": "@corpora/config-tailwind",
+    "version": "0.0.1",
+    "private": true,
+    "main": "./tailwind.config.ts",
+    "exports": {
+        ".": "./tailwind.config.ts"
+    },
+    "devDependencies": {
+        "tailwindcss": "^4"
+    }
+}

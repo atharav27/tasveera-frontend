@@ -1,0 +1,46 @@
+# Integration of Bookings List Hook
+
+## Goal
+Integrate [useVendorBookings](file:///c:/Users/athar/OneDrive/Desktop/corpora-frontend/apps/vendor-frontend/hooks/use-bookings.ts#59-97) hook into [apps/vendor-frontend/app/bookings/page.tsx](file:///c:/Users/athar/OneDrive/Desktop/corpora-frontend/apps/vendor-frontend/app/bookings/page.tsx) to fetch real data for Pending Requests, Upcoming Trips, and Completed Trips.
+
+## User Review Required
+> [!WARNING]
+> **Missing Data in API Response**
+> The provided API response structure is missing several fields required by the current UI tables:
+> - **Upcoming Trips**: `driverName`, `driverVehicle`, `isLive` status.
+> - **Completed Trips**: `driverName`, `driverVehicle`, `durationDistance`.
+> 
+> **Action**: I will use placeholder values ("N/A" or "Not Assigned") for these fields in the integration. The backend API needs to optionally include `driver` and `trip_stats` objects to fully populate these tables.
+
+## Proposed Changes
+
+### [apps/vendor-frontend/app/bookings/page.tsx](file:///c:/Users/athar/OneDrive/Desktop/corpora-frontend/apps/vendor-frontend/app/bookings/page.tsx)
+- Import [useVendorBookings](file:///c:/Users/athar/OneDrive/Desktop/corpora-frontend/apps/vendor-frontend/hooks/use-bookings.ts#59-97) from `@/hooks/use-bookings`.
+- Track `page` and `pageSize` state (default 1, 10).
+- Call [useVendorBookings](file:///c:/Users/athar/OneDrive/Desktop/corpora-frontend/apps/vendor-frontend/hooks/use-bookings.ts#59-97) with the current `activeTab` value.
+- Map the API response `bookings` to the specific row formats required by [PendingRequestsTable](file:///c:/Users/athar/OneDrive/Desktop/corpora-frontend/apps/vendor-frontend/components/bookings/pending-requests-table.tsx#44-274), [UpcomingTripsTable](file:///c:/Users/athar/OneDrive/Desktop/corpora-frontend/apps/vendor-frontend/components/bookings/upcoming-trips-table.tsx#42-250), and [CompletedTripsTable](file:///c:/Users/athar/OneDrive/Desktop/corpora-frontend/apps/vendor-frontend/components/bookings/completed-trips-table.tsx#39-187).
+- Handle `isLoading` state by showing a loader or passing it down (if tables supported it, otherwise wrap tables in loader).
+
+### Data Mapping Strategy
+| UI Column | API Field | Fallback / Logic |
+| :--- | :--- | :--- |
+| **Pending Requests** | | |
+| Booking ID | `bookingNumber` | |
+| Corporate | `corporate.name` | |
+| Route | `route` | Combine `pickup` -> `drop` |
+| Package | `package.name` | |
+| Schedule | `schedule` | Combine `time`, [date](file:///c:/Users/athar/OneDrive/Desktop/corpora-frontend/apps/corporate-frontend/hooks/use-tags.ts#93-111) |
+| Estimate Fare | `estimatedFare` | Format currency + amount |
+| **Upcoming Trips** | | |
+| Driver Name | **MISSING** | "Unassigned" |
+| Driver Vehicle | **MISSING** | "N/A" |
+| Is Live | **MISSING** | `status === 'in_progress'` |
+| **Completed Trips** | | |
+| Duration/Distance | **MISSING** | "N/A" |
+| Driver Name | **MISSING** | "N/A" |
+
+## Verification Plan
+### Manual Verification
+- Verify that switching tabs (Requests, Upcoming, Completed) triggers the API call with the correct `tab` parameter.
+- Verify that data populates in the tables (even with missing driver info).
+- Check that "No bookings found" or empty state is handled gracefully.
