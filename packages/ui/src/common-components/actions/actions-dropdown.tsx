@@ -1,6 +1,6 @@
 "use client";
 
-import { type LucideIcon, Ban, CarTaxiFront, CircleCheckBig, CopyX, Download, Eye, MoreHorizontal, Pencil, Send, Ticket, Trash2, UserPlus, Users, XCircle } from "lucide-react";
+import { type LucideIcon, Ban, CarTaxiFront, CircleCheckBig, CopyX, Download, Eye, MoreHorizontal, Pencil, Send, Ticket, Trash2, UserPlus, Users, XCircle, Star, TrendingUp } from "lucide-react";
 
 import { Button } from "@corpora/ui";
 import {
@@ -11,7 +11,7 @@ import {
 } from "@corpora/ui";
 import { cn } from "@corpora/ui";
 
-export type ActionIconName = "eye" | "pencil" | "ban" | "trash2" | "ticket" | "xcircle" | "download" | "userPlus" | "carTaxiFront" | "deactivate" | "users" | "send" | "circleCheckBig";
+export type ActionIconName = "eye" | "pencil" | "ban" | "trash2" | "ticket" | "xcircle" | "download" | "userPlus" | "carTaxiFront" | "deactivate" | "users" | "send" | "circleCheckBig" | "star" | "trendingUp";
 
 const iconMap: Record<ActionIconName, LucideIcon> = {
   eye: Eye,
@@ -27,6 +27,8 @@ const iconMap: Record<ActionIconName, LucideIcon> = {
   users: Users,
   send: Send ,
   circleCheckBig: CircleCheckBig,
+  star: Star,
+  trendingUp: TrendingUp,
 };
 
 export type ActionItem = {

@@ -74,12 +74,7 @@ export const allNavItems: NavItem[] = [
         name: "Settings",
         icon: Settings,
         children: [
-            {
-                name: "Admin Users",
-                href: "/settings/admin-users",
-                allowedRoles: ["super-admin"],
-            },
-            { name: "My Profile", href: "/settings" },
+            { name: "My Profile", href: "/settings/my-profile" },
         ],
     },
 ];
